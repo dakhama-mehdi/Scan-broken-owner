@@ -1,4 +1,6 @@
-# Scan-broken-owner
+# Scan-broken-owner 
+
+(Project is building)
 
 # Description : 
 Script to Collect broken owners/representing a risk of (user accounts, Computers, Groups and Organizational Units).
