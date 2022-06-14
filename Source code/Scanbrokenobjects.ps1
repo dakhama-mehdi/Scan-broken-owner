@@ -113,8 +113,6 @@ au lieu du domaine du DC sur lequel on opère.
 	$domsid = $dom.domainsid.tostring()
 	$domain = $dom.DistinguishedName
 
-
-    $genericgroups += ((Get-Acl "AD:$((Get-ADRootDSE).schemaNamingContext)").Access).IdentityReference
 	$skipdeaultgroups += (Get-ADGroup -filter 'SID -ne "S-1-5-32-545" -and SID -ne "S-1-5-32-546"' -Searchbase (Get-ADObject -Filter 'name -eq "Builtin"')).name
 	$skipdeaultgroups += (Get-ADGroup -Filter { AdminCOunt -eq 1 -and iscriticalsystemobject -like "*" }).Name
 	$skipdeaultgroups += (Get-ADGroup ($domsid + '-522')).name
