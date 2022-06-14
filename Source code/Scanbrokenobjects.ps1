@@ -56,8 +56,8 @@ param (
 #endregion Params
 
 #region Settings
-Import-Module .\source\Microsoft.ActiveDirectory.Management.dll
-Import-Module .\source\Microsoft.ActiveDirectory.Management.resources.dll
+Import-Module .\sources\Microsoft.ActiveDirectory.Management.dll
+Import-Module .\sources\Microsoft.ActiveDirectory.Management.resources.dll
 
  $currentpath = Get-Location
  $ReportPath = "$currentpath\ADObjectOwners-Au-$(Get-Date -f 'dd-MM-yyyy').html"
