@@ -139,6 +139,8 @@ $var = [ADSI]("LDAP://" + $_.distinguishedname)
 
 if ($skipdeaultgroups -notcontains $var.PsBase.ObjectSecurity.Owner.Split("\")[1]) { 
 
+$sid = $_["objectsid"][0]
+$sidstring = (New-Object System.Security.Principal.SecurityIdentifier($sid, 0)).Value
 
   $Obj = [PSCustomObject]@{
       [PSCustomObject]@{
@@ -147,11 +149,13 @@ if ($skipdeaultgroups -notcontains $var.PsBase.ObjectSecurity.Owner.Split("\")[1
         SamAccountName    = $_["samaccountname"][0]
         DistinguishedName = $_["distinguishedname"][0]
         ObjectGUID        = $_["ObjectGUID"][0]
-        SID               = $_["objectsid"][0]
+        SID               = $sidstring
         UserPrincipalName = $_["userprincipalname"][0] 
         Owner             = $var.PsBase.ObjectSecurity.Owner.Split("\")[1]
       
     }
+    
+    $sid = $sidstring = $null
 
     # Add $Obj to $ResultUsers
    $brokenusers.add($Obj)
