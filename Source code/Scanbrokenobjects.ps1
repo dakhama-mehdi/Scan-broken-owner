@@ -128,25 +128,27 @@ $nbrsUsers = $NbrsbrokenPC = 0
 
 # Collecte des info de l'AD
 Write-Host 'Collecte des infos sur les comptes utilisateurs'
-Get-ADUser -Filter * | ForEach-Object {
+([adsisearcher]"(&(objectCategory=User))").findall().properties | ForEach-Object {
+
 
 $var = $null
 
-$name = $_.name
+$name = $_.samaccountname
 
-$var= [ADSI](([ADSISearcher]"(name=$name)").Findall().Path)
+$var = [ADSI]("LDAP://" + $_.distinguishedname)
 
 if ($skipdeaultgroups -notcontains $var.PsBase.ObjectSecurity.Owner.Split("\")[1]) { 
 
 
   $Obj = [PSCustomObject]@{
-        Name              = $_.name
-        GivenName         = $_.givenname   
-        SamAccountName    = $_.samaccountname    
-        DistinguishedName = $_.distinguishedname
-        ObjectGUID        = $_.ObjectGUID
-        SID               = $_.sid
-        UserPrincipalName = $_.userprincipalname 
+      [PSCustomObject]@{
+        Name              = $_["name"][0]
+        GivenName         = $_["givenname"][0]  
+        SamAccountName    = $_["samaccountname"][0]
+        DistinguishedName = $_["distinguishedname"][0]
+        ObjectGUID        = $_["ObjectGUID"][0]
+        SID               = $_["objectsid"][0]
+        UserPrincipalName = $_["userprincipalname"][0] 
         Owner             = $var.PsBase.ObjectSecurity.Owner.Split("\")[1]
       
     }
