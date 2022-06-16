@@ -1,4 +1,4 @@
-﻿
+
 
 <#
 .SYNOPSIS
@@ -56,8 +56,8 @@ param (
 #endregion Params
 
 #region Settings
-Import-Module .\sources\Microsoft.ActiveDirectory.Management.dll
-Import-Module .\sources\Microsoft.ActiveDirectory.Management.resources.dll
+Import-Module .\Microsoft.ActiveDirectory.Management.dll
+Import-Module .\Microsoft.ActiveDirectory.Management.resources.dll
 
  $currentpath = Get-Location
  $ReportPath = "$currentpath\ADObjectOwners-Au-$(Get-Date -f 'dd-MM-yyyy').html"
@@ -130,7 +130,6 @@ $nbrsUsers = $NbrsbrokenPC = 0
 Write-Host 'Collecte des infos sur les comptes utilisateurs'
 ([adsisearcher]"(&(objectCategory=User))").findall().properties | ForEach-Object {
 
-
 $var = $null
 
 $name = $_.samaccountname
@@ -143,7 +142,6 @@ $sid = $_["objectsid"][0]
 $sidstring = (New-Object System.Security.Principal.SecurityIdentifier($sid, 0)).Value
 
   $Obj = [PSCustomObject]@{
-      [PSCustomObject]@{
         Name              = $_["name"][0]
         GivenName         = $_["givenname"][0]  
         SamAccountName    = $_["samaccountname"][0]
@@ -154,8 +152,6 @@ $sidstring = (New-Object System.Security.Principal.SecurityIdentifier($sid, 0)).
         Owner             = $var.PsBase.ObjectSecurity.Owner.Split("\")[1]
       
     }
-    
-    $sid = $sidstring = $null
 
     # Add $Obj to $ResultUsers
    $brokenusers.add($Obj)
