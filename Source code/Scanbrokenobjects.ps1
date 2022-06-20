@@ -56,8 +56,7 @@ param (
 #endregion Params
 
 #region Settings
-Import-Module .\Microsoft.ActiveDirectory.Management.dll
-Import-Module .\Microsoft.ActiveDirectory.Management.resources.dll
+
 
  $currentpath = Get-Location
  $ReportPath = "$currentpath\ADObjectOwners-Au-$(Get-Date -f 'dd-MM-yyyy').html"
@@ -106,16 +105,11 @@ et dispose de droits sur le domaine courant via une relation d'Approbation, les 
 au lieu du domaine du DC sur lequel on opère.
 #>
 
-    $genericgroups = $skipdeaultgroups = $conditions = $null
-	$genericgroups = $skipdeaultgroups = @()
+    $skipdeaultgroups = $null
+	$skipdeaultgroups = @()
 	
-	$dom = (Get-ADDomain)
-	$domsid = $dom.domainsid.tostring()
-	$domain = $dom.DistinguishedName
-
-	$skipdeaultgroups += (Get-ADGroup -filter 'SID -ne "S-1-5-32-545" -and SID -ne "S-1-5-32-546"' -Searchbase (Get-ADObject -Filter 'name -eq "Builtin"')).name
-	$skipdeaultgroups += (Get-ADGroup -Filter { AdminCOunt -eq 1 -and iscriticalsystemobject -like "*" }).Name
-	$skipdeaultgroups += (Get-ADGroup ($domsid + '-522')).name
+	$skipdeaultgroups += ([adsisearcher]"(&(groupType:1.2.840.113556.1.4.803:=1)(!(objectSID=S-1-5-32-546))(!(objectSID=S-1-5-32-545)))").findall().Properties.name
+	$skipdeaultgroups += ([adsisearcher] "(&(objectCategory=group)(admincount=1)(iscriticalsystemobject=*))").FindAll().Properties.name
     
     $brokenusers = $brkoencomputers = $brokengroups = $brokenou = $null
 #endregion Infos sur le domaine
@@ -130,16 +124,16 @@ $nbrsUsers = $NbrsbrokenPC = 0
 Write-Host 'Collecte des infos sur les comptes utilisateurs'
 ([adsisearcher]"(&(objectCategory=User))").findall().properties | ForEach-Object {
 
-$var = $null
-
 $name = $_.samaccountname
 
-$var = [ADSI]("LDAP://" + $_.distinguishedname)
+Write-Host on scanne $name `r`n
 
-if ($skipdeaultgroups -notcontains $var.PsBase.ObjectSecurity.Owner.Split("\")[1]) { 
+$getowner = [ADSI]("LDAP://" + $_.distinguishedname)
 
-$sid = $_["objectsid"][0]
-$sidstring = (New-Object System.Security.Principal.SecurityIdentifier($sid, 0)).Value
+if ($skipdeaultgroups -notcontains $getowner.PsBase.ObjectSecurity.Owner.Split("\")[1]) { 
+
+
+c
 
   $Obj = [PSCustomObject]@{
         Name              = $_["name"][0]
@@ -149,7 +143,7 @@ $sidstring = (New-Object System.Security.Principal.SecurityIdentifier($sid, 0)).
         ObjectGUID        = $_["ObjectGUID"][0]
         SID               = $sidstring
         UserPrincipalName = $_["userprincipalname"][0] 
-        Owner             = $var.PsBase.ObjectSecurity.Owner.Split("\")[1]
+        Owner             = $getowner.PsBase.ObjectSecurity.Owner.Split("\")[1]
       
     }
 
@@ -159,6 +153,8 @@ $sidstring = (New-Object System.Security.Principal.SecurityIdentifier($sid, 0)).
     $NbrsbrokenPC++
 
 }
+
+    $name = $getowner = $null
     
     $nbrsUsers++
     # reset des valeurs des variables pour le tour suivant de la boucle
@@ -181,26 +177,32 @@ $nbrsPC = $NbrsbrokenPC = 0
 
 # Collecte des info de l'AD
 Write-Host 'Collecte des infos sur les comptes Ordinateurs'
-Get-ADComputer -Filter * | ForEach-Object {
+([adsisearcher]"(&(objectCategory=computer))").findall().properties | ForEach-Object {
 
-$var = $name = $null
+$getowner = $null
 
-$name = $_.SamAccountName
+$name = $_.samaccountname
 
-$var= [ADSI](([ADSISearcher]"(SamAccountName=$name)").Findall().Path)
+Write-Host on scanne $name `r`n
+
+$getowner = [ADSI]("LDAP://" + $_.distinguishedname)
 
 
-if ($genericgroups -notcontains $var.PsBase.ObjectSecurity.Owner -and $skipdeaultgroups -notcontains $var.PsBase.ObjectSecurity.Owner.Split("\")[1]) { 
+if ($skipdeaultgroups -notcontains $getowner.PsBase.ObjectSecurity.Owner.Split("\")[1]) { 
+    
 
+    $sid = $_["objectsid"][0]
+    $sidstring = (New-Object System.Security.Principal.SecurityIdentifier($sid, 0)).Value
 
   $Obj = [PSCustomObject]@{
-        Name              = $_.name
-        DistinguishedName = $_.distinguishedname
-        Enabled           = $_.Enabled
-        SID               = $_.sid
-        SamAccountName    = $_.samaccountname 
-        ObjectGUID        = $_.ObjectGUID
-        Owner             = $var.PsBase.ObjectSecurity.Owner.Split("\")[1]
+        Name              = $_["name"][0]
+        DistinguishedName = $_["Enabled"][0]
+        Enabled           = $_["samaccountname"][0]
+        SID               = $_["distinguishedname"][0]
+        SamAccountName    = $_["whencreated"][0] 
+        ObjectGUID        = $sidstring
+        OperatingSysteme  = $_["operatingsystem"][0]
+        Owner             = $getowner.PsBase.ObjectSecurity.Owner.Split("\")[1]
       
     }
 
@@ -225,106 +227,6 @@ Write-Verbose 'Synthèse des info Ordinateur'
 
 #endregion Ordinateurs
 
-#region Groupes
-# Initialisation d'un object GenericList
-$brokengroups = [System.Collections.Generic.List[PSCustomObject]]::new()
-$nbrgroups = $nbrbrokengrp = 0
-
-# Collect AD infos
-Write-Host 'Collecte des infos sur les groupes'
-Get-ADGroup -Filter * | ForEach-Object {
-
-$var = $null
-
-$name = $_.SamAccountName 
-
-$var= [ADSI](([ADSISearcher]"(SamAccountName=$name)").Findall().Path)
-
-
-if ($genericgroups -notcontains $var.PsBase.ObjectSecurity.Owner -and $skipdeaultgroups -notcontains $var.PsBase.ObjectSecurity.Owner.Split("\")[1]) { 
-
-
-  $Obj = [PSCustomObject]@{
-        Name              = $_.name
-        DistinguishedName = $_.distinguishedname
-        GroupCategory     = $_.GroupCategory
-        GroupScope        = $_.GroupScope
-        SamAccountName    = $_.samaccountname    
-        ObjectGUID        = $_.ObjectGUID
-        SID               = $_.sid
-        Owner             = $var.PsBase.ObjectSecurity.Owner.Split("\")[1]
-      
-    }
-
-    # Add $Obj to $ResultUsers
-    $brokengroups.add($Obj)
-
-    $nbrbrokengrp++
-
-    }
-
-    $nbrgroups++
-
-}
-
-
-
-$SynthesisGroupsAccounts = [PSCustomObject]@{
-    'Nombre total de Groupes'                           = $nbrgroups
-    'Nombre total de Groupes Après filtrage à corriger' = $nbrbrokengrp
-}
-Write-Verbose 'Synthèse des info sur les Groupes'
-
-#endregion Groupes
-
-#region Unités d'Organisation
-# Initialisation d'un object GenericList
-$BrokenOU = [System.Collections.Generic.List[PSCustomObject]]::new()
-$nbrsOU = $nbrbrokenou = 0
-
-# Collect AD infos
-Write-Host 'Collecte des infos sur les OUs'
-Get-ADOrganizationalUnit -Filter * | ForEach-Object {
-
-$var = $null
-
-$name = $_.DistinguishedName
-
-$var= [ADSI](([ADSISearcher]"(DistinguishedName=$name)").Findall().Path)
-
-if ($genericgroups -notcontains $var.PsBase.ObjectSecurity.Owner -and $skipdeaultgroups -notcontains $var.PsBase.ObjectSecurity.Owner.Split("\")[1]) { 
-
-
-  $Obj = [PSCustomObject]@{
-        Name              = $_.name
-        DistinguishedName = $_.distinguishedname
-        City              = $_.City
-        Country           = $_.Country
-        ManagedBy         = $_.ManagedBy   
-        ObjectGUID        = $_.ObjectGUID
-        Owner             = $var.PsBase.ObjectSecurity.Owner.Split("\")[1]
-               
-   }
-
-    # Add $Obj to $ResultUsers
-    $NoGoodOU.add($Obj)
-
-    $nbrbrokenou++
-
-}
-
-    $nbrsOU++
-}
-
-
-$SynthesisOUsAccounts = [PSCustomObject]@{
-    "Nombre total des OUs"  = $nbrsOU
-    "Nombre total des OUs Après filtrage à corriger" = $nbrbrokenou
-}
-
-
-
-#endregion Unités d'Organisation
 
 #region export in html
 Write-Verbose 'Génération du rapport ...'
@@ -365,41 +267,6 @@ New-HTML -FilePath $ReportPath -Online -ShowHTML {
 
     }  # end New-HtmlTab
 
-    # 3ème Onglet Groupes
-    New-HTMLTab -Name "Groupes" {
-
-        # Ici on va mettre les informations qu'on a préalablement mis dans la variable $SynthesisGroupssAccounts
-        New-HTMLTable -DataTable $SynthesisGroupsAccounts {
-         New-TableContent -ColumnName 'Nombre total de Groupes' -Alignment center -BackGroundColor BrightGreen
-         New-TableContent -ColumnName 'Nombre total de Groupes Après filtrage à corriger' -Alignment center -Color white -BackGroundColor BurntOrange
-        } # end-HewhtmlTable
-
-        # Ici on va mettre les informations qu'on a préalablement mis dans la variable $NoGoodGroups
-        New-HTMLTable -DataTable $brokengroups {
-            New-TableContent -ColumnName 'Name' -Alignment center
-            New-TableContent -ColumnName 'Owner' -Alignment center -Color white -BackGroundColor BrightRed
-        } # end-HewhtmlTable
-
-    }  # end New-HtmlTab
-
-    # 4ème Onglet Groupes
-    New-HTMLTab -Name "OU" {
-
-        # Ici on va mettre les informations qu'on a préalablement mis dans la variable $SynthesisGroupssAccounts
-        New-HTMLTable -DataTable $SynthesisOUsAccounts {
-         New-TableContent -ColumnName 'Nombre total des OUs' -Alignment center -BackGroundColor BrightGreen
-         New-TableContent -ColumnName 'Nombre total des OUs Après filtrage à corriger' -Alignment center -BackGroundColor BurntOrange
-        } # end-HewhtmlTable
-
-        # Ici on va mettre les informations qu'on a préalablement mis dans la variable $NoGoodGroups
-        New-HTMLTable -DataTable $NoGoodOU {
-            New-TableContent -ColumnName 'Name' -Alignment center
-            New-TableContent -ColumnName 'Owner' -Alignment center -Color white -BackGroundColor BrightRed
-        } # end-HewhtmlTable
-
-    }  # end New-HtmlTab
-
-    }  # end New-HtmlTab
-
+}
 
 #endregion export in html
