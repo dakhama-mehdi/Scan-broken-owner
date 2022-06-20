@@ -1,38 +1,40 @@
 
+# Script on Beta Version
 
 <#
 .SYNOPSIS
-    Collecte des propriétaires (owners) cassées des comptes utilisateurs, Ordinateurs, Groupes et Unités d'Organisation
+    Collection of broken owners of user accounts, Computers, Groups and Organizational Units
 
 .DESCRIPTION
-    Collecte des propriétaires (owners) des comptes utilisateurs, Ordinateurs, Groupes et Unités d'Organisation
+    Collection of owners (owners) of user accounts, Computers, Groups and Organizational Units
 
-    Quand un objet est créé par un utilisateur non membre d’un des groupes ci-après par le biais d’une délégation ou de l’utilisation du groupe « Opérateur de compte »,
-    c’est l’utilisateur qui a créé l’objet qui en est le propriétaire.
-    Groupes :   Administrateurs du domaine
-                Administrateurs de l’entreprise
-                BUILTIN\Administrateurs
-                AUTORITE NT\Système
+    When an object is created by a user who is not a member of one of the groups below through delegation or the use of the "Account Operator" group,
+    the user who created the object is the owner.
+    Groups: Domain Admins
+                Company administrators
+                BUILTIN\Administrators
+                NT AUTHORITY\System
 
-    Si un filtre est effectué via le nom des groupes, celui-ci doit être adapté à la langue d'installation du contrôleur de domaine sur lequel vous opérez.
-    C'est pourquoi, on préfèrera utiliser pour filtrer les "Well-known SIDs"
+    If a filter is performed via the name of the groups, this must be adapted to the installation language of the domain controller on which you operate.
+    Therefore, we prefer to use to filter "Well-known SIDs"
 
-    Cette situation peut poser des problèmes de sécurité, cf : https://www.ired.team/offensive-security-experiments/active-directory-kerberos-abuse/resource-based-constrained-delegation-ad-computer-object-take-over-and-privilged-code-execution
-    Si vous avez seulement quelques objets, il est possible de le corriger à la main, mais si vous en avez plusieurs dizaines/centaines, cela peut prendre beaucoup de temps.
+    This situation can pose security problems, see : https://www.ired.team/offensive-security-experiments/active-directory-kerberos-abuse/resource-based-constrained-delegation-ad-computer-object-take-over-and-privilged-code-execution
+    If you only have a few objects, it is possible to correct it by hand, but if you have several tens/hundreds, it can take a long time.
 
-   Dans le cas d'utilisation ANSSI, le script permet de corriger le probleme : vuln3_owner
+   In the case of ANSSI use, the script makes it possible to correct the problem: vuln3_owner
    https://www.cert.ssi.gouv.fr/uploads/guide-ad.html#owner
 
 .NOTES
-    Version : 3.0
+    Version : 4.0
+    Change : Add ADSI queries, rebuild all search method
     Date : 13/06/2022
-        Utilisation de GenericList au lieu d'Array (plus rapide sur grosses collections)
-        Génération rapport au format HTML
-        Uitlisation des Well-Known SID au lieu des Names pour les filtres
+        Using GenericList instead of Array (faster on big collections)
+        Generating report in HTML format
+        Using Well-Known SIDs instead of Names for filters
 #>
 
 #region Params
-<# permet d'ajouter les paramètres communs dont le verbose Mode
+<# allows to add common parameters including verbose Mode
 [CmdletBinding()]
 param (
     [Parameter()]
@@ -60,7 +62,6 @@ param (
 
  $currentpath = Get-Location
  $ReportPath = "$currentpath\ADObjectOwners-Au-$(Get-Date -f 'dd-MM-yyyy').html"
-
 
 
 Write-Verbose 'Paramétrage pour utiliser TLS1.2 pour metre à jour les modules sur PowershellGallery à partir du 01/04/2020'
