@@ -106,7 +106,7 @@ et dispose de droits sur le domaine courant via une relation d'Approbation, les 
 au lieu du domaine du DC sur lequel on opère.
 #>
 
-    $skipdeaultgroups = $null
+        $skipdeaultgroups = $null
 	$skipdeaultgroups = @()
 	
 	$skipdeaultgroups += ([adsisearcher]"(&(groupType:1.2.840.113556.1.4.803:=1)(!(objectSID=S-1-5-32-546))(!(objectSID=S-1-5-32-545)))").findall().Properties.name
