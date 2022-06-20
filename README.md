@@ -5,7 +5,7 @@
 # Description : 
 Script to Collect broken owners/representing a risk of (user accounts, Computers, Groups and Organizational Units).
 
-# Objectif : 
+# Objective : 
 
 Clean AD and prevent various attacks as well as reduce CT vulnerabilities on objects
 
