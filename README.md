@@ -39,9 +39,7 @@ Prevent Attack : Kerberos Resource-based Constrained Delegation on Computer Obje
  
  
  DAKHAMA MEHDI
- Olivier the frog
- Mdunca83
+ Souin Mattieuw 
  Adham Bouomar
- ... and why not you also :D 
  
  
