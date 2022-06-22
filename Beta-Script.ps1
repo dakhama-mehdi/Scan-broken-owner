@@ -51,34 +51,30 @@ if ($skipdeaultgroups -notcontains $getowner.PsBase.ObjectSecurity.Owner.Split("
     $sidstring = (New-Object System.Security.Principal.SecurityIdentifier($sid, 0)).Value
 
     if ($_["objectcategory"][0] -match "Computer") { 
-    
-    
-      $Object = New-Object PSObject -Property @{
+        
+        $Object = [PSCustomObject]@{
         Name              = $_["name"][0]
         GivenName         = $_["givenname"][0]  
         SamAccountName    = $_["samaccountname"][0]
         DistinguishedName = $_["distinguishedname"][0]
-        ObjectGUID        = $_["ObjectGUID"][0]
+        Created           = $_["whencreated"][0]
         SID               = $sidstring
-        UserPrincipalName = $_["userprincipalname"][0] 
-        Owner             = $getowner.PsBase.ObjectSecurity.Owner.Split("\")[1]
-      
+        OS                = $_["operatingsystem"][0]
+        Owner             = $getowner.PsBase.ObjectSecurity.Owner.Split("\")[1]      
     }
 
-    #$brokenpc.add($Obj)
-    $brokenpc += $Object
-                                  
+    $brokenpc += $Object                                  
     $NbrsbrokenPC++                              
                                   
                                   } else {
 
 
-        $Object = New-Object PSObject -Property @{
+        $Object = [PSCustomObject]@{
         Name              = $_["name"][0]
         GivenName         = $_["givenname"][0]  
         SamAccountName    = $_["samaccountname"][0]
         DistinguishedName = $_["distinguishedname"][0]
-        ObjectGUID        = $_["ObjectGUID"][0]
+        Created           = $_["whencreated"][0]
         SID               = $sidstring
         UserPrincipalName = $_["userprincipalname"][0] 
         Owner             = $getowner.PsBase.ObjectSecurity.Owner.Split("\")[1]
@@ -86,18 +82,13 @@ if ($skipdeaultgroups -notcontains $getowner.PsBase.ObjectSecurity.Owner.Split("
 
 
                                   }
-
-    #$brokenusers.add($Obj)
     $brokenusers += $Object
-
     $nbrbrokenusers++
 
 }
 
     $name = $getowner = $null
     
-    
-    # reset des valeurs des variables pour le tour suivant de la boucle
 }
 }
 
