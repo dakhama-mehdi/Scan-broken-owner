@@ -23,16 +23,16 @@
 
 #Get Privilege groups domain for filter
 
-  $skipdeaultgroups = $null
-	$skipdeaultgroups = @()	
-	$skipdeaultgroups += ([adsisearcher]"(&(groupType:1.2.840.113556.1.4.803:=1)(!(objectSID=S-1-5-32-546))(!(objectSID=S-1-5-32-545)))").findall().Properties.name
-	$skipdeaultgroups += ([adsisearcher] "(&(objectCategory=group)(admincount=1)(iscriticalsystemobject=*))").FindAll().Properties.name
+$skipdeaultgroups = $null
+$skipdeaultgroups = @()	
+$skipdeaultgroups += ([adsisearcher]"(&(groupType:1.2.840.113556.1.4.803:=1)(!(objectSID=S-1-5-32-546))(!(objectSID=S-1-5-32-545)))").findall().Properties.name
+$skipdeaultgroups += ([adsisearcher] "(&(objectCategory=group)(admincount=1)(iscriticalsystemobject=*))").FindAll().Properties.name
 
 #creating arrays that will contain noncompiding objects    
-  $brokenusers = $Object = $brokenpc = $null
-  $brokenusers = [System.Collections.ArrayList]@() 
-  $brokenpc = [System.Collections.ArrayList]@()
-  $nbrbrokenusers = $NbrsbrokenPC = 0
+$brokenusers = $Object = $brokenpc = $null
+$brokenusers = [System.Collections.ArrayList]@() 
+$brokenpc = [System.Collections.ArrayList]@()
+$nbrbrokenusers = $NbrsbrokenPC = 0
 
 #Search computer or user from all domain (search from specific OU will be added later)
 #You can stop by ctrl+c script any times
@@ -45,8 +45,10 @@ Write-Output -InputObject "We scanne $name"
 
 $getowner = [ADSI]("LDAP://" + $_.distinguishedname)
 
+#check if owner is different from the array
 if ($skipdeaultgroups -notcontains $getowner.PsBase.ObjectSecurity.Owner.Split("\")[1]) { 
 
+#Convert Binary SID     
     $sid = $_["objectsid"][0]
     $sidstring = (New-Object System.Security.Principal.SecurityIdentifier($sid, 0)).Value
 
