@@ -2,6 +2,8 @@
 
 (Project is building)
 
+![Scan-broken-owners](https://user-images.githubusercontent.com/49924401/175139428-13175605-2c31-44fe-9b65-e15ba3230097.gif)
+
 # Description : 
 Script to Collect broken owners/representing a risk of (user accounts, Computers, Groups and Organizational Units).
 
