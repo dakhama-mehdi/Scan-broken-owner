@@ -1,6 +1,7 @@
 
 <#	
    .NOTES
+   Commercial use or copying code is not permitted yet
    ===========================================================================
    Version      : 1
    Updated      : Juin, 2022
