@@ -97,7 +97,7 @@ if ($skipdeaultgroups -notcontains $getowner.PsBase.ObjectSecurity.Owner.Split("
 
 
 
-
+#Format HTML Head and page 
 $head = @"
 <style  type="text/css">
 body { background-color:#FFFFFF;
@@ -142,6 +142,7 @@ tr:nth-child(n + 20) {
 </style>
 "@
 
+#Generate HTML page style
 ( ConvertTo-Html  -PreContent "<h1>Broken PC : $nbrbrokenusers</h1>" -Head $head) + ($brokenusers | ConvertTo-Html -PreContent "<h1> </h1>" -Head $head) +
 ( ConvertTo-Html -PreContent "<h1>Broken Users : $NbrsbrokenPC</h1>" -Head $head) + ($brokenpc | ConvertTo-Html -PreContent "<h1> </h1>" -Head $head)  | Out-File Servicesoutput.html
 
