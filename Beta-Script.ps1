@@ -7,7 +7,7 @@
    Created by   : Dakhama Mehdi
    Contribution : Souin Matthiew
                   Boamar Adham
-   Organization : CADIM.org
+   Organization : 
    Filename:      Scan-AD-Broken-object-Owner
    Tool Name :    Broken-Owner
    ===========================================================================
