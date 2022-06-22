@@ -4,7 +4,7 @@
    ===========================================================================
    Version      : 1
    Updated      : Juin, 2022
-   Released by  : Dakhama Mehdi
+   Created by   : Dakhama Mehdi
    Contribution : Souin Matthiew
                   Boamar Adham
    Organization : CADIM.org
@@ -147,3 +147,7 @@ tr:nth-child(n + 20) {
 ( ConvertTo-Html -PreContent "<h1>Broken Users : $NbrsbrokenPC</h1>" -Head $head) + ($brokenpc | ConvertTo-Html -PreContent "<h1> </h1>" -Head $head)  | Out-File Servicesoutput.html
 
 start .\Servicesoutput.html
+
+#You can list result on consol if you use ISE, or use out-gridview
+# exemples to list all brokenusers or computers on out-gridview
+# $brokenusers + $brokenpc | Out-GridView
