@@ -1,17 +1,17 @@
 
 <#	
-	.NOTES
-	===========================================================================
-	 Version      : 1
+   .NOTES
+   ===========================================================================
+   Version      : 1
    Updated      : Juin, 2022
-	 Released by  : Dakhama Mehdi
+   Released by  : Dakhama Mehdi
    Contribution : Souin Matthiew
                   Boamar Adham
-	 Organization : CADIM.org
-	 Filename:      Scan-AD-Broken-object-Owner
-	 Tool Name :    Broken-Owner
-	===========================================================================
-	.DESCRIPTION
+   Organization : CADIM.org
+   Filename:      Scan-AD-Broken-object-Owner
+   Tool Name :    Broken-Owner
+   ===========================================================================
+  .DESCRIPTION
   This script, help to detect broken owners/representing a risk of (user accounts, Computers, Groups and Organizational Units), Based on Microsoft recommandation
   It generates an HTML page, and does not require any module.
   .How to use 
@@ -19,6 +19,7 @@
   Lanuched with user from AD (no right admin or privilege groups is required)
 			
 #>
+
 
 
 #Get Privilege groups domain for filter
