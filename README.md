@@ -5,7 +5,10 @@
 ![Scan-broken-owners](https://user-images.githubusercontent.com/49924401/175139428-13175605-2c31-44fe-9b65-e15ba3230097.gif)
 
 # Description : 
-Script to Collect broken owners/representing a risk of (user accounts, Computers, Groups and Organizational Units).
+This script aims to help companies audit and have a clean AD, to reduce lateral movement vulnerabilities due to the different risks of kerberos delegation attacks
+
+Script scan and collect broken owners/representing a risk of (user accounts, Computers, Groups and Organizational Units).
+
 
 # Objective : 
 
