@@ -1,6 +1,6 @@
 # Scan-AD-broken-owner 
 
-![Scboo](Pictures-1/1.png "Scaboo")
+![Scboo](Picture/1.png "Scaboo")
 
 (Project in building)
 
