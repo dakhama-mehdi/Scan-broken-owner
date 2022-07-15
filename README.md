@@ -4,7 +4,6 @@
 
 (Project in building)
 
-![Scan-broken-owners](https://user-images.githubusercontent.com/49924401/175139428-13175605-2c31-44fe-9b65-e15ba3230097.gif)
 
 # Description : 
 This script aims to help companies audit and have a clean AD, to reduce lateral movement vulnerabilities due to the different risks of kerberos delegation attacks
@@ -49,4 +48,5 @@ Prevent Attack : Kerberos Resource-based Constrained Delegation on Computer Obje
  Souin Mattieuw 
  Adham Bouomar
  
+ ![Scan-broken-owners](https://user-images.githubusercontent.com/49924401/175139428-13175605-2c31-44fe-9b65-e15ba3230097.gif)
  
