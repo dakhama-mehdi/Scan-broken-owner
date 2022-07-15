@@ -1,6 +1,7 @@
 # Scan-AD-broken-owner 
 
-![Scboo](.\Source code\Pictures\Scaboo.png)
+![Scboo](Source code\Pictures\Scaboo.png "Scaboo")
+![Logo](pictures/hyepr-vem-logo-github.png "Logo")
 
 (Project is building)
 
