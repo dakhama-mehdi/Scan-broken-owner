@@ -2,8 +2,6 @@
 
 ![Scboo](Picture/2.png "Scaboo")
 
-(Project in building)
-
 
 # Description : 
 
