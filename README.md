@@ -5,9 +5,9 @@
 
 # Description : 
 
-This Script help companies to audi vulnerability Owner on AD, prevent attack and steal information
+This Script help companies to Audit vulnerability Owner on AD, prevent attack and steal information.
 
-Script scan and collect broken owners/representing a risk of (user accounts, Computers, Groups and Organizational Units).
+Script scan and collect broken owners/representing a risk of (users accounts, Computers, Groups and Organizational Units).
 
 
 # Objective : 
