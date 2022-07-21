@@ -41,11 +41,11 @@ Prevent Attack : Kerberos Resource-based Constrained Delegation on Computer Obje
  
  # Edit Script 
  
- the script list by default 50 objects brokent by category, you can list more on change value at line :
+ the script list by default 50 objects brokent by category, you can list more on change value at line : 237
  
- The script generate HTML format by default, you can also show on gridview or CSV by uncomment line : 
+ The script generate HTML format by default, you can also show on gridview or CSV by uncomment line : 267
  
- You can add a specific groups or user to skip from scan, by add it in line : 
+ You can add a specific groups or user to skip from scan, by add it in line : 49
  
 
  # Thanks to All contributors, specified :  
