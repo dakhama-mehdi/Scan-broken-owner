@@ -33,9 +33,7 @@ Prevent Attack : Kerberos Resource-based Constrained Delegation on Computer Obje
 
 # How to use : 
 
- Script will be available in two version PS1 or GUI (with EXE files signed) 
- 
- Copy the script on ISE, lanuch it from machine in the domain and sample user
+ Copy the script from "Source Code" folder on ISE and lanuch it from the machine on the domain with sample user account
  
  No advance right is needed
  
