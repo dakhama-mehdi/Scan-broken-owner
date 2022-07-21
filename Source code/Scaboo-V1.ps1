@@ -27,8 +27,8 @@ $testdomain = $env:username
 $testldap = ([adsisearcher]"(&(objectCategory=User)(samaccountname=$testdomain))").findone()  
 
 if (!$testldap) {
-
-Write-Host 'cannot contact AD domain, or user havent right'
+cls
+Write-Host 'cannot contact AD domain, or user havent right' -ForegroundColor Yellow
 break;
 
  }
