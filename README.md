@@ -6,18 +6,20 @@
 
 
 # Description : 
-This script aims to help companies audit and have a clean AD, to reduce lateral movement vulnerabilities due to the different risks of kerberos delegation attacks
+
+This Script help companies to audi vulnerability Owner on AD, prevent attack and steal information
 
 Script scan and collect broken owners/representing a risk of (user accounts, Computers, Groups and Organizational Units).
 
 
 # Objective : 
 
-Clean AD and prevent various attacks as well as reduce CT vulnerabilities on objects
+Clean AD and prevent various attacks also reduce CT vulnerabilities on objects
 
 # About : 
 
-When an user is specified as the owner of an object, that principal can always change permissions on the object, implicitly, regardless of its permissions. In practice, this means that if you are the owner, you cannot deny yourself access to it. Although you can create explicit deny permission (ACE) entries even for yourself, you can always delete them later as long as you are the owner of the object. Even if the ACL contains no permission entries, the owner can still modify the permissions. Primary owner behavior is implied.
+when the user creates an object, he will be the owner and can modify the permissions at any time, even if we remove the permission on the AD he can still perform actions on the objects he owns, he will then become a target of attack, because access to these objects will recover accounts
+
 
 # Recommandation : 
 
@@ -27,7 +29,7 @@ Links : https://docs.microsoft.com/en-us/previous-versions/windows/it-pro/window
 
 # Why to Use script : 
 
-This script help to list these object who do not possess the legitimate properties recommanded
+This script help to list all object who do not possess the legitimate properties recommanded
 
 Prevent Attack : Kerberos Resource-based Constrained Delegation on Computer Object Takeover
 
@@ -35,12 +37,19 @@ Prevent Attack : Kerberos Resource-based Constrained Delegation on Computer Obje
 
  Script will be available in two version PS1 or GUI (with EXE files signed) 
  
- the PS1 can be used with a AD lite module (if Rsat is not installed in the machine)
+ Copy the script on ISE, lanuch it from machine in the domain and sample user
  
- if you have RSAT you dont need the source files.
+ No advance right is needed
  
- PS : Required PSWriteHtml module to output HMTL format (no needed if use GUI)
+ # Edit Script 
  
+ the script list by default 50 objects brokent by category, you can list more on change value at line :
+ 
+ The script generate HTML format by default, you can also show on gridview or CSV by uncomment line : 
+ 
+ You can add a specific groups or user to skip from scan, by add it in line : 
+ 
+
  # Thanks to All contributors, specified :  
  
  
