@@ -24,7 +24,7 @@
 
 $testdomain = $env:username
 
-$testldap = ([adsisearcher]"(&(objectCategory=User)(samaccountname=))").findone()  
+$testldap = ([adsisearcher]"(&(objectCategory=User)(samaccountname=$testdomain))").findone()  
 
 if (!$testldap) {
 cls
