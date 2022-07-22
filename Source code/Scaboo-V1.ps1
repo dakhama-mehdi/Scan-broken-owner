@@ -20,7 +20,7 @@
 			
 #>
 
-# Test if domain is present, and user can send ldap request
+# Test connection and ldap request on DC
 
 $testdomain = $env:username
 
