@@ -6,6 +6,7 @@
    Created by   : Dakhama Mehdi
    Contribution : Souin Matthiew
                   Boamar Adham
+   Thanks 	: Powershell_French
    Organization : 
    Filename:      Scan-AD-Broken-object-Owner
    Tool Name :    Broken-Owner
