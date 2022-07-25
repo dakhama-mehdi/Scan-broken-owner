@@ -19,7 +19,7 @@ Clean AD and prevent various attacks also reduce CT vulnerabilities on objects
 when the user creates an object, he will be the owner and can modify the permissions at any time, even if we remove the permission on the AD he can still perform actions on the objects he owns, he will then become a target of attack, because access to these objects will recover accounts
 
 
-# Recommandation : 
+# Recommendation : 
 
 Microsoft recommends placing a Domain Admin privileged group or groups memebers on objects at risk to protect them from various vulnerabilities.
 
@@ -48,8 +48,6 @@ Prevent Attack : Kerberos Resource-based Constrained Delegation on Computer Obje
 
  # Thanks to All contributors, specified :  
  
- 
- DAKHAMA MEHDI
  Souin Mattieuw 
  Adham Bouomar
  
