@@ -260,9 +260,9 @@ $htmltest+= (ConvertTo-Html  -PreContent "<h1>Broken Users : $nbrbrokenusers</h1
 
 #endregion Createhtml
 
-$htmltest | Out-File Servicesoutput.html
+$htmltest | Out-File report-brokenowner.html
 
-start .\Servicesoutput.html
+start .\report-brokenowner.html
 
 # You can list result on consol if you use ISE, or use out-gridview
 # exemples to list all brokenusers or computers on out-gridview
