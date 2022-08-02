@@ -53,5 +53,5 @@ Prevent Attack : Kerberos Resource-based Constrained Delegation on Computer Obje
  
  # Demo : 
  
- ![Scan-broken-owners](https://user-images.githubusercontent.com/49924401/175139428-13175605-2c31-44fe-9b65-e15ba3230097.gif)
+
  
