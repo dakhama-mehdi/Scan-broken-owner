@@ -53,5 +53,5 @@ Prevent Attack : Kerberos Resource-based Constrained Delegation on Computer Obje
  
  # Demo : 
  
-
+![scaboo1](https://user-images.githubusercontent.com/49924401/182320247-f0eedb0e-cc1f-48a0-b89e-ec3f988e1c76.gif)
  
