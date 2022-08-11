@@ -1,4 +1,4 @@
-# Scan-AD-broken-owner 
+# Scan-AD-broken-object-owner 
 
 ![Scboo](Picture/2.png "Scaboo")
 
