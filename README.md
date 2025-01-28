@@ -39,7 +39,7 @@ Prevent Attack : Kerberos Resource-based Constrained Delegation on Computer Obje
  
  # Edit Script 
  
- the script list by default 50 objects brokent by category, you can list more on change value at line : 237
+ the script list by default 200 objects brokent by category, you can list more on change value (n + 200) at line : 239 
  
  The script generate HTML format by default, you can also show on gridview or CSV by uncomment line : 267
  
