@@ -162,7 +162,7 @@ $name = $_.samaccountname
 
 if (!$name) { $name = $_.name }
 
-Write-Host "We scanne $name" -ForegroundColor Yellow 
+Write-Host "We scan $name" -ForegroundColor Yellow 
 
 $getowner = [ADSI]("LDAP://" + $_.distinguishedname)
 
