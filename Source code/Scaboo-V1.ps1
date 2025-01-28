@@ -236,7 +236,7 @@ body {
                             font-weight:bold;
                             font-size:14pt;
                             }
-tr:nth-child(n + 50) {
+tr:nth-child(n + 200) {
     visibility: hidden;
 }
 </style>
