@@ -7,7 +7,7 @@ Objective: clean up Active Directory and reduce ownership-based control-takeover
 ## 📸 Screenshot
 <img width="900" height="500" alt="Image" src="Picture/Scanbroowner.PNG" />
 
-[Online Example] : [View Online Example](https://dakhama-mehdi.github.io/LAPS-Delegation-Audit/Example/Legacylapsreports.html)
+[Online Example] : [View Online Example]([https://dakhama-mehdi.github.io/Scan-broken-owner/Picture/report-brokenowner.html)
 
 ## About
 
