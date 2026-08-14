@@ -8,7 +8,7 @@ This script helps companies audit Owner vulnerabilities on Active Directory obje
 
 Objective: clean up Active Directory and reduce ownership-based control-takeover (CT) vulnerabilities on objects.
 
-## 📸 Screenshot
+## Screenshot
 <img width="900" height="500" alt="Image" src="Picture/Scanbroowner.PNG" />
 
 [Online Example] : [View Online Example](https://dakhama-mehdi.github.io/Scan-broken-owner/Picture/report-brokenowner.html)
