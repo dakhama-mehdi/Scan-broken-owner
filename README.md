@@ -38,6 +38,3 @@ To skip specific groups or users from the scan, add them to the skip list near t
 Developed by Dakhama Mehdi.  
 Contribution: Baomar Adham.  
 Thanks to It-Connect.fr.  
-## Demo
-
-![scaboo1](https://user-images.githubusercontent.com/49924401/182320247-f0eedb0e-cc1f-48a0-b89e-ec3f988e1c76.gif)
