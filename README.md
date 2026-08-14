@@ -1,6 +1,6 @@
 # Scan Actve Directory Broken Owner
 
-![Scboo](Picture/2.png "Scaboo")
+![Scboo](Picture/Scanbroowner.PNG "Scaboo")
 
 
 This script helps companies audit Owner vulnerabilities on Active Directory objects, and prevents attacks based on object ownership abuse. It scans and lists broken owners representing a security risk, across user accounts, computers, groups, and Organizational Units.
