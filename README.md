@@ -1,5 +1,9 @@
 # Scan Actve Directory Broken Owner
 
+![License](https://img.shields.io/github/license/dakhama-mehdi/Scan-broken-owner)
+![Stars](https://img.shields.io/github/stars/dakhama-mehdi/Scan-broken-owner)
+![PowerShell](https://img.shields.io/badge/PowerShell-5.1%2B-blue)
+
 This script helps companies audit Owner vulnerabilities on Active Directory objects, and prevents attacks based on object ownership abuse. It scans and lists broken owners representing a security risk, across user accounts, computers, groups, and Organizational Units.
 
 Objective: clean up Active Directory and reduce ownership-based control-takeover (CT) vulnerabilities on objects.
