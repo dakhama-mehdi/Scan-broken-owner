@@ -1,11 +1,10 @@
 # Scan Actve Directory Broken Owner
 
-![Scboo](Picture/Scanbroowner.PNG "Scaboo")
-
-
 This script helps companies audit Owner vulnerabilities on Active Directory objects, and prevents attacks based on object ownership abuse. It scans and lists broken owners representing a security risk, across user accounts, computers, groups, and Organizational Units.
 
 Objective: clean up Active Directory and reduce ownership-based control-takeover (CT) vulnerabilities on objects.
+
+![Scboo](Picture/Scanbroowner.PNG "Scaboo")
 
 ## About
 
@@ -29,9 +28,9 @@ To skip specific groups or users from the scan, add them to the skip list near t
 
 ## Credits
 
-Developed by Dakhama Mehdi. 
-Contribution: Baomar Adham. 
-Thanks to It-Connect.fr. 
+Developed by Dakhama Mehdi.  
+Contribution: Baomar Adham.  
+Thanks to It-Connect.fr.  
 ## Demo
 
 ![scaboo1](https://user-images.githubusercontent.com/49924401/182320247-f0eedb0e-cc1f-48a0-b89e-ec3f988e1c76.gif)
