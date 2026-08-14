@@ -36,5 +36,5 @@ To skip specific groups or users from the scan, add them to the skip list near t
 ## Credits
 
 Developed by Dakhama Mehdi.  
-Contribution: Baomar Adham.  
+Contribution: Baomar Adham, Guylaine NGOUDJO  
 Thanks to It-Connect.fr.  
