@@ -22,8 +22,9 @@ When a user creates an object in Active Directory, they automatically become its
 Both Microsoft and ANSSI (French National Cybersecurity Agency) recommend setting a privileged group (Domain Admins, Enterprise Admins, or an equivalent dedicated administrative group) as the Owner of Active Directory objects.
 
 - Microsoft: https://docs.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/dd125370(v=ws.10)?redirectedfrom=MSDN
-- ANSSI guide (ANSSI-PA-099): https://cyber.gouv.fr/publications/recommandations-pour-ladministration-securisee-des-si-reposant-sur-ad
+- ANSSI guide (ANSSI-PA-099): https://www.cert.ssi.gouv.fr/uploads/ad_checklist.html#vuln_owner
 - IT-Connect (FR): https://www.it-connect.fr/securite-de-lactive-directory-attention-aux-objets-avec-un-proprietaire-inadapte/
+- Exploit: https://www.hackingarticles.in/abusing-ad-dacl-writeowner/
 
 This script lists all objects that do not have the recommended, legitimate Owner property, and helps prevent attacks such as Kerberos Resource-Based Constrained Delegation abuse via Computer Object takeover.
 
