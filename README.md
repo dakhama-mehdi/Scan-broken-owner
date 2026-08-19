@@ -30,7 +30,7 @@ This script lists all objects that do not have the recommended, legitimate Owner
 
 ## How to use
 
-Run Scaboo-v2.0.ps1 from a machine joined to the AD domain, using a standard domain user account. No administrative rights, RSAT, or ActiveDirectory PowerShell module are required, it relies only on adsisearcher/ADSI, built into Windows.
+Run Scaboo-vxx.ps1 from a machine joined to the AD domain, using a standard domain user account. No administrative rights, RSAT, or ActiveDirectory PowerShell module are required, it relies only on adsisearcher/ADSI, built into Windows.
 
 To skip specific groups or users from the scan, add them to the skip list near the top of the script (`$skipdefaultgroups`). The report is generated in HTML format by default.
 
